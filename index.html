@@ -1,47 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity: Water</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+  <header>
+    <!-- Use an image for the logo instead of text -->
+    <div class="logo">
+      <img src="img/cw_logo-2.png" alt="Charity: Water logo" style="height:30px;">
+    </div>
+    <nav>
+      <a href="#">Take Action</a>
+      <a href="#">About Us</a>
+      <a href="#">Why Water?</a>
+    </nav>
+    <button class="start-btn">start a ripple</button>
+  </header>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <section class="hero">
+    <!-- The image comes first so text can overlay it -->
+    <div class="hero-img">
+      <img src="img/hero-image.jpg" alt="Smiling child with clean water">
+    </div>
+    <div class="hero-text">
+      <h1>Big ripples start with just a drop.</h1>
+      <p>Make waves with your life-changing gift that brings safe water to those who need it most.</p>
+      <div class="buttons">
+        <button class="donate-btn">Gift Once | Gift Monthly</button>
+        <button class="join-btn">Join today</button>
+      </div>
+      <p class="note">100% goes to funding water projects</p>
+    </div>
+  </section>
+  <!-- Add this script before the closing body tag -->
+  <script>
+    // This function adds a ripple effect to any button passed in
+    function addRippleEffect(button) {
+      button.addEventListener('click', function(e) {
+        // Create a span for the ripple
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
+        // Set the size of the ripple (make it big enough to cover the button)
+        const size = Math.max(button.offsetWidth, button.offsetHeight) * 2;
+        ripple.style.width = size + 'px';
+        ripple.style.height = size + 'px';
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+        // Get the position of the click inside the button
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        // Set the position of the ripple
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+
+        // Add the ripple to the button
+        button.appendChild(ripple);
+
+        // Remove the ripple after the animation
+        ripple.addEventListener('animationend', function() {
+          ripple.remove();
+        });
+      });
+    }
+
+    // Get all the buttons we want to have the ripple effect
+    const startBtn = document.querySelector('.start-btn');
+    const donateBtn = document.querySelector('.donate-btn');
+    const joinBtn = document.querySelector('.join-btn');
+
+    // Add the ripple effect to each button
+    addRippleEffect(startBtn);
+    addRippleEffect(donateBtn);
+    addRippleEffect(joinBtn);
+  </script>
 </body>
 </html>
