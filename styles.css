@@ -21,6 +21,56 @@ header {
   font-size: 1.2rem;
 }
 
+/* Logo image swap for mobile */
+/* By default, show the default logo and hide the mobile logo */
+.logo-default {
+  display: inline;
+}
+.logo-mobile {
+  display: none;
+}
+
+/* On small screens, hide the default logo and show the water can logo */
+@media (max-width: 480px) {
+  /* Swap logos for mobile */
+  .logo-default {
+    display: none;
+  }
+  .logo-mobile {
+    display: inline;
+    height: 55px;
+    /* Make sure it doesn't get squished */
+    max-height: 55px;
+  }
+
+  /* Show hamburger and start button in a row */
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: 1rem;
+    gap: 0;
+  }
+
+  /* Use order to rearrange items for mobile */
+  .logo {
+    order: 1;
+  }
+  .start-btn {
+    order: 2;
+    margin: 0;
+    /* Optional: set min-width for better tap target */
+    min-width: 120px;
+  }
+  .hamburger {
+    order: 3;
+    display: flex;
+    margin-left: auto;
+  }
+}
+
 nav {
   display: flex;
   flex-wrap: wrap;
@@ -125,6 +175,11 @@ nav a {
   /* Add a little space above if needed */
 }
 
+/* Make logo images a bit bigger for better visibility */
+.logo img {
+  max-height: 45px;
+}
+
 /* Make the image fill the width of the page */
 .hero-img img {
   width: 100vw; /* 100% of the viewport width */
@@ -148,6 +203,61 @@ nav a {
     transform: scale(4);
     opacity: 0;
   }
+}
+
+/* Hamburger menu styles */
+/* Make the hamburger button smaller */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 32px;   /* was 40px */
+  width: 32px;    /* was 40px */
+  padding: 0;
+  margin-left: auto; /* Push to right */
+}
+
+/* Hamburger bars: make them shorter and thinner */
+.hamburger .bar {
+  width: 18px;    /* was 25px */
+  height: 2px;    /* was 3px */
+  background-color: #333;
+  margin: 3px 0;  /* was 4px 0 */
+  border-radius: 2px;
+  display: block;
+}
+
+/* Dropdown menu for mobile */
+.dropdown-menu {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 60px; /* Below header */
+  right: 1.5rem;
+  background: #fff3c4;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1rem;
+  z-index: 100;
+  flex-direction: column;
+  min-width: 160px;
+}
+
+/* Show dropdown when .show class is added */
+.dropdown-menu.show {
+  display: flex;
+}
+
+/* Style dropdown links and button */
+.dropdown-menu a,
+.dropdown-menu .start-btn {
+  display: block;
+  margin: 0.5rem 0;
+  text-align: left;
 }
 
 /* Responsive adjustments */
@@ -191,7 +301,38 @@ nav a {
   }
 }
 
+/* On mobile, move hero text below the image and remove overlay/background */
 @media (max-width: 480px) {
+  .hero-text {
+    /* Remove absolute positioning so it sits below the image */
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    /* Remove background overlay */
+    background: none;
+    box-shadow: none;
+    padding: 1rem;
+    margin: 0 auto 1.5rem auto;
+    max-width: 95vw;
+    width: 95vw;
+    border-radius: 0;
+    text-align: left;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    padding: 0;
+  }
+
+  .hero-img {
+    width: 100vw;
+    margin: 0;
+  }
+
   .hero-text h1 {
     font-size: 1.5rem;
   }
@@ -199,5 +340,38 @@ nav a {
   .donate-btn, .join-btn {
     padding: 0.75rem;
     font-size: 0.95rem;
+  }
+
+  /* Hide regular nav only, keep start button visible */
+  .main-nav {
+    display: none;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Position header items in a row: logo left, hamburger right */
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: 1rem;
+    gap: 0;
+  }
+
+  /* Remove all margins from start-btn so it sits naturally between logo and hamburger */
+  .start-btn {
+    margin: 0;
+    /* Optional: set min-width for better tap target */
+    min-width: 120px;
+  }
+
+  /* Hamburger menu is last, no margin-left so it sits right of start-btn */
+  .hamburger {
+    display: flex;
+    margin-left: auto;
   }
 }

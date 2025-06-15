@@ -8,16 +8,35 @@
 </head>
 <body>
   <header>
-    <!-- Use an image for the logo instead of text -->
+    <!-- Logo: show one image on desktop, another on mobile -->
     <div class="logo">
-      <img src="img/cw_logo-2.png" alt="Charity: Water logo" style="height:30px;">
+      <!-- Default logo for desktop/tablet -->
+      <img src="img/cw_logo-2.png" alt="Charity: Water logo" class="logo-default" style="height:30px;">
+      <!-- Make the mobile logo a bit bigger -->
+      <img src="img/water-can-transparent.png" alt="Water Can Logo" class="logo-mobile" style="height:55px;">
     </div>
-    <nav>
+    <!-- Hamburger menu button for mobile -->
+    <button class="hamburger" aria-label="Open menu">
+      <!-- Hamburger icon: three stacked bars -->
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <!-- Navigation links (desktop/tablet) -->
+    <nav class="main-nav">
       <a href="#">Take Action</a>
       <a href="#">About Us</a>
       <a href="#">Why Water?</a>
     </nav>
+    <!-- Start a ripple button (moved before hamburger for mobile) -->
     <button class="start-btn">start a ripple</button>
+    <!-- Dropdown menu for mobile (hidden by default) -->
+    <div class="dropdown-menu">
+      <a href="#">Take Action</a>
+      <a href="#">About Us</a>
+      <a href="#">Why Water?</a>
+      <!-- Removed start a ripple button from here -->
+    </div>
   </header>
 
   <section class="hero">
@@ -77,6 +96,22 @@
     addRippleEffect(startBtn);
     addRippleEffect(donateBtn);
     addRippleEffect(joinBtn);
+
+    // Hamburger menu functionality for mobile
+    const hamburger = document.querySelector('.hamburger');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    // When hamburger is clicked, toggle the dropdown menu
+    hamburger.addEventListener('click', function() {
+      dropdownMenu.classList.toggle('show');
+    });
+
+    // Optional: Close dropdown when clicking outside (for better UX)
+    document.addEventListener('click', function(event) {
+      if (!hamburger.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
   </script>
 </body>
 </html>
